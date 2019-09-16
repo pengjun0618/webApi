@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Web.Http;
 using System.Linq;
 using DemoWebApi.App_Start;
+using log4net;
 
 namespace DemoWebApi.Controllers
 {
@@ -11,9 +12,10 @@ namespace DemoWebApi.Controllers
     /// 
     /// </summary>
     [ControllerGroup("Swagger测试控制器","Swagger测试")]
-    [ApiAuthorize]
+
     public class UserController : ApiController
     {
+        public static readonly ILog log = LogManager.GetLogger("WebLogger");
 
         public IUserBLL _userBll;
 
@@ -25,11 +27,12 @@ namespace DemoWebApi.Controllers
         [HttpGet]
         public IHttpActionResult GetUserList()
         {
-
+            log.Info("Log日志打印:测试测试测试！");
             IEnumerable<User> userList = _userBll.GetUserList();
             return Json(userList);
         }
 
+        [ApiAuthorize]
         [HttpGet]
         public IHttpActionResult GetUserListById(int id)
         {

@@ -29,6 +29,8 @@ namespace DemoWebApi
                         c.CustomProvider((defaultProvider) => new CachingSwaggerProvider(defaultProvider));
                         //注册Swagger分组
                         c.GroupActionsBy(apiDesc=>apiDesc.GetControllerAndActionAttributes<ControllerGroupAttribute>().Any() ? apiDesc.GetControllerAndActionAttributes<ControllerGroupAttribute>().First().GroupName+"."+ apiDesc.GetControllerAndActionAttributes<ControllerGroupAttribute>().First().Useage:"无模块归类");
+                        //请求头加token
+                        c.OperationFilter<HttpHeaderFilter>();
                     })
                 .EnableSwaggerUi(c =>
                     {

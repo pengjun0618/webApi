@@ -13,7 +13,7 @@ namespace DemoWebApi.App_Start
     {
         protected override bool IsAuthorized(HttpActionContext actionContext)
         {
-            var authHeader = from t in actionContext.Request.Headers where t.Key == "Authentication" select t.Value.FirstOrDefault();
+            var authHeader = from t in actionContext.Request.Headers where t.Key == "Authorization" select t.Value.FirstOrDefault();
             if (authHeader != null)
             {
                 string secretKey = "JWT SECRET"; //口令加密秘钥
@@ -35,7 +35,7 @@ namespace DemoWebApi.App_Start
                             return false;
                         }
 
-                        actionContext.RequestContext.RouteData.Values.Add("Authentication", json);
+                        actionContext.RequestContext.RouteData.Values.Add("Authorization", json); 
                         return true;
                     }
                     catch (Exception ex)

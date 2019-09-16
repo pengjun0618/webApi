@@ -14,8 +14,12 @@ namespace DemoWebApi
         {
             GlobalConfiguration.Configure(WebApiConfig.Register);
 
+            log4net.Config.XmlConfigurator.Configure(new System.IO.FileInfo(Server.MapPath("~/Config/log4net.config")));
+
             // 配置依赖注入
             AutofacWebApiConfig.Run();
+
+
         }
     }
 }
