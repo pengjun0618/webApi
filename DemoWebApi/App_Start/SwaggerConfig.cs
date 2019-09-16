@@ -28,18 +28,18 @@ namespace DemoWebApi
                         //注册CachingSwaggerProvider
                         c.CustomProvider((defaultProvider) => new CachingSwaggerProvider(defaultProvider));
                         //注册Swagger分组
-                        c.GroupActionsBy(apiDesc=>apiDesc.GetControllerAndActionAttributes<ControllerGroupAttribute>().Any() ? apiDesc.GetControllerAndActionAttributes<ControllerGroupAttribute>().First().GroupName+"."+ apiDesc.GetControllerAndActionAttributes<ControllerGroupAttribute>().First().Useage:"无模块归类");
+                        c.GroupActionsBy(apiDesc => apiDesc.GetControllerAndActionAttributes<ControllerGroupAttribute>().Any() ? apiDesc.GetControllerAndActionAttributes<ControllerGroupAttribute>().First().GroupName + "." + apiDesc.GetControllerAndActionAttributes<ControllerGroupAttribute>().First().Useage : "无模块归类");
                         //请求头加token
                         c.OperationFilter<HttpHeaderFilter>();
                     })
                 .EnableSwaggerUi(c =>
                     {
-                        c.InjectJavaScript(Assembly.GetExecutingAssembly(), "DemoWebApi.Scripts.swagger.js");
+                        c.InjectJavaScript(Assembly.GetExecutingAssembly(), "DemoWebApi.Scripts.Swagger.swagger.js");
                     });
         }
         private static string GetXmlCommentsPath()
         {
-            return String.Format(@"{0}\bin\DemoWebApi.xml", System.AppDomain.CurrentDomain.BaseDirectory);
+            return String.Format(@"{0}\bin\DemoWebApi.xml", AppDomain.CurrentDomain.BaseDirectory);
         }
     }
 }

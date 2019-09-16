@@ -1,18 +1,16 @@
 ﻿using Demo.IBLL;
 using Demo.Model;
+using DemoWebApi.App_Start;
 using JWT;
 using JWT.Algorithms;
 using JWT.Serializers;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Web;
 using System.Web.Http;
-using System.Web.Mvc;
 
 namespace DemoWebApi.Controllers
 {
+    [ControllerGroup("1", "Token创建")]
     public class TokenController : ApiController
     {
         public IUserBLL _userBll;
@@ -22,7 +20,7 @@ namespace DemoWebApi.Controllers
             this._userBll = _userBll;
         }
 
-        [System.Web.Http.HttpPost]
+        [HttpPost]
         public IHttpActionResult Login(LoginRequest loginRequest)
         {
             TokenInfo tokenInfo = new TokenInfo();

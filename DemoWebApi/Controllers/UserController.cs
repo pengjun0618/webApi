@@ -8,10 +8,7 @@ using log4net;
 
 namespace DemoWebApi.Controllers
 {
-    /// <summary>
-    /// 
-    /// </summary>
-    [ControllerGroup("Swagger测试控制器","Swagger测试")]
+    [ControllerGroup("2","Swagger测试")]
 
     public class UserController : ApiController
     {
