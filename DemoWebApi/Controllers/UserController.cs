@@ -26,7 +26,7 @@ namespace DemoWebApi.Controllers
         {
             log.Info("Log日志打印:测试测试测试！");
             IEnumerable<User> userList = _userBll.GetUserList();
-            return Json(userList);
+            return Json(new ApiResultModel { Code = 200, Data = userList });
         }
 
         [ApiAuthorize]
@@ -34,7 +34,7 @@ namespace DemoWebApi.Controllers
         public IHttpActionResult GetUserListById(int id)
         {
             User user = _userBll.GetUserList().Where(x => x.Id == id).FirstOrDefault();
-            return Json(user);
+            return Json(new ApiResultModel { Code=200,Data= user});
         }
 
     }

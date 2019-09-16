@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApiResultModel.cs" />
     <Compile Include="LoginRequest.cs" />
     <Compile Include="Payload.cs" />
     <Compile Include="TokenInfo.cs" />

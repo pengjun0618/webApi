@@ -5,6 +5,7 @@ using JWT;
 using JWT.Algorithms;
 using JWT.Serializers;
 using System;
+using System.Net;
 using System.Text;
 using System.Web.Http;
 
@@ -23,7 +24,7 @@ namespace DemoWebApi.Controllers
         [HttpPost]
         public IHttpActionResult Login(LoginRequest loginRequest)
         {
-            TokenInfo tokenInfo = new TokenInfo();
+            ApiResultModel reult = new ApiResultModel();
             if (loginRequest != null)
             {
                 string userName = loginRequest.UserName;
@@ -32,8 +33,8 @@ namespace DemoWebApi.Controllers
                 User user = _userBll.GetUserByUserNameAndPassword(userName, password);
                 if (user == null)
                 {
-                    tokenInfo.Success = false;
-                    tokenInfo.Message = "当前用户不存在！";
+                    reult.Code = 400;
+                    reult.Message = "当前用户不存在！";
                 }
 
                 Payload payload = new Payload();
@@ -49,22 +50,22 @@ namespace DemoWebApi.Controllers
                     IBase64UrlEncoder urlEncoder = new JwtBase64UrlEncoder();//base64加解密
                     IJwtEncoder encoder = new JwtEncoder(algorithm, serializer, urlEncoder);//JWT编码
                     var token = encoder.Encode(payload, key);//生成令牌
-                    tokenInfo.Success = true;
-                    tokenInfo.Token = token;
+                    reult.Code = 200;
+                    reult.Data = token;
                 }
                 catch (Exception ex)
                 {
-                    tokenInfo.Success = false;
-                    tokenInfo.Message = ex.Message;
+                    reult.Code = 400;
+                    reult.Message = ex.Message;
                 }
 
             }
             else
             {
-                tokenInfo.Success = false;
-                tokenInfo.Message = "用户或密码为空！";
+                reult.Code = 400;
+                reult.Message = "用户或密码为空！";
             }
-            return Json(tokenInfo);
+            return Json(reult);
         }
     }
 }
