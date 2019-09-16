@@ -1,3 +1,2 @@
-ASP.NET WEBAPI:
-JWT+Log4net+Swagger UI
+ASP.NET WEBAPI+JWT+Log4net+Swagger UI
 
