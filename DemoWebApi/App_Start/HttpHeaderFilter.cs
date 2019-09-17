@@ -8,6 +8,12 @@ namespace DemoWebApi.App_Start
 {
     public class HttpHeaderFilter : IOperationFilter
     {
+        /// <summary>
+        /// Swagger生成token认证
+        /// </summary>
+        /// <param name="operation"></param>
+        /// <param name="schemaRegistry"></param>
+        /// <param name="apiDescription"></param>
         public void Apply(Operation operation, SchemaRegistry schemaRegistry, System.Web.Http.Description.ApiDescription apiDescription)
         {
             if (operation.parameters == null)
